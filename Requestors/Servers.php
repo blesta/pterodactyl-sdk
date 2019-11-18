@@ -1,7 +1,9 @@
 <?php
 namespace Blesta\PterodactylSDK\Requestors;
 
-class Servers extends Requestor
+include_once dirname(__DIR__) . '/Requestor.php';
+
+class Servers extends \Blesta\PterodactylSDK\Requestor
 {
     /**
      * Fetches a list of servers from Pterodactyl
@@ -69,7 +71,7 @@ class Servers extends Requestor
      */
     public function editBuild($server_id, array $params)
     {
-        return $this->apiRequest('application/servers/' . $server_id . '/details', $params, 'PATCH');
+        return $this->apiRequest('application/servers/' . $server_id . '/build', $params, 'PATCH');
     }
 
     /**
@@ -81,7 +83,7 @@ class Servers extends Requestor
      */
     public function editStartup($server_id, array $params)
     {
-        return $this->apiRequest('application/servers/' . $server_id . '/details', $params, 'PATCH');
+        return $this->apiRequest('application/servers/' . $server_id . '/startup', $params, 'PATCH');
     }
 
     /**

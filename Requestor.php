@@ -18,17 +18,23 @@ class Requestor
      * @var string The Pterodactyl API URL
      */
     private $apiUrl;
+    /**
+     * @var bool Whether to connect using ssl
+     */
+    private $useSsl;
 
     /**
-     * Initializes the request parameter
+     * Initializes the requestor with connection parameters
      *
      * @param string $apiKey The API key
      * @param string $apiUrl The API URL
+     * @param bool $useSsl Whether to connect using ssl (optional)
      */
-    public function __construct($apiKey, $apiUrl)
+    public function __construct($apiKey, $apiUrl, $useSsl = true)
     {
         $this->apiKey = $apiKey;
         $this->apiUrl = $apiUrl;
+        $this->useSsl = $useSsl;
     }
 
     /**
@@ -41,7 +47,7 @@ class Requestor
      */
     protected function apiRequest($route, array $body = [], $method = 'GET')
     {
-        $url = $this->apiUrl . '/' . $route;
+        $url = ($this->useSsl ? 'https://' : '') . $this->apiUrl . '/' . $route;
         $curl = curl_init();
 
         switch (strtoupper($method)) {
@@ -54,7 +60,7 @@ class Requestor
                 curl_setopt($curl, CURLOPT_POST, 1);
                 // Use the default behavior to set data fields
             default:
-                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($body));
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
                 break;
         }
 
@@ -63,7 +69,7 @@ class Requestor
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 30);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($curl, CURLOPT_SSLVERSION, 1);
 
@@ -77,20 +83,20 @@ class Requestor
         $result = curl_exec($curl);
         if (curl_errno($curl)) {
             $error = [
-                'error' => 'Curl Error',
-                'message' => 'An internal error occurred, or the server did not respond to the request.',
+                'errors' => [
+                    (object)['detail' => 'An internal error occurred, or the server did not respond to the request.']
+                ],
                 'status' => 500
             ];
 
             return new PterodactylResponse(['content' => json_encode($error), 'headers' => []]);
         }
+        $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
         curl_close($curl);
-
-        $data = explode("\n", $result);
 
         // Return request response
         return new PterodactylResponse(
-            ['content' => $data[count($data) - 1], 'headers' => array_splice($data, 0, count($data) - 1)]
+            ['content' => substr($result, $header_size), 'headers' => explode("\n", substr($result, 0, $header_size))]
         );
     }
 }
