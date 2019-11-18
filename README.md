@@ -7,9 +7,9 @@ This is an SDK that integrates with APIs from [Pterodactyl](https://pterodactyl.
 ## Installation
 You can install the SDK via composer:
 
-    ```
-    composer require blesta/pterodactyl-sdk
-    ```
+```
+composer require blesta/pterodactyl-sdk
+```
 
 ## Usage
 
