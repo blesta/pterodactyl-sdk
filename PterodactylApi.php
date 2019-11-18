@@ -1,6 +1,14 @@
 <?php
 namespace Blesta\PterodactylSDK;
 
+include 'PterodactylResponse.php';
+include 'Requestors/Client.php';
+include 'Requestors/Users.php';
+include 'Requestors/Nodes.php';
+include 'Requestors/Locations.php';
+include 'Requestors/Servers.php';
+include 'Requestors/Nests.php';
+
 /**
  * Pterodactyl API
  *
@@ -10,13 +18,6 @@ namespace Blesta\PterodactylSDK;
  */
 class PterodactylApi
 {
-    use PterodactyleResponse,
-        Objects\Client,
-        Objects\Users,
-        Objects\Nodes,
-        Objects\Locations,
-        Objects\Servers,
-        Objects\Nests;
     /**
      * @var string The API URL
      */
@@ -25,25 +26,35 @@ class PterodactylApi
      * @var string The Pterodactyl API key
      */
     private $apiKey;
+    /**
+     * @var bool Whether to connect using ssl
+     */
+    private $useSsl;
 
     /**
      * Initializes the request parameter
      *
      * @param string $apiKey The API key
+     * @param string $baseUrl The base URL of the pterodactyl panel
+     * @param bool $useSsl Whether to connect using ssl (optional)
      */
-    public function __construct($apiKey, $baseUrl)
+    public function __construct($apiKey, $baseUrl, $useSsl = true)
     {
         $this->apiKey = $apiKey;
-        $this->apiUrl = trim($baseUrl, '/') . '/api/';
+        $this->apiUrl = trim($baseUrl, '/') . '/api';
+        $this->useSsl = $useSsl;
     }
 
-    function __get($class_name)
+    /**
+     * Gets a requestor object
+     *
+     * @param string $className The name of the Requestor class to get
+     * @return type
+     */
+    public function __get($className)
     {
-        if (class_exists($class_name)) {
-            $this->{$class_name} = new $class_name($this->apiKey, $this->apiUrl);
-            return $this->{$class_name};
-        } else {
-            // Throw exception of unfound class name
-        }
+        $r = new \ReflectionClass('\\Blesta\\PterodactylSDK\\Requestors\\' . $className);
+        $this->{$className} = $r->newInstanceArgs([$this->apiKey, $this->apiUrl, $this->useSsl]);
+        return $this->{$className};
     }
 }

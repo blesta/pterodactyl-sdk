@@ -1,7 +1,9 @@
 <?php
 namespace Blesta\PterodactylSDK\Requestors;
 
-class Client extends Requestor
+include_once dirname(__DIR__) . '/Requestor.php';
+
+class Client extends \Blesta\PterodactylSDK\Requestor
 {
     /**
      * Fetches a list of servers from Pterodactyl
@@ -25,9 +27,9 @@ class Client extends Requestor
     }
 
     /**
-     * Fetches utinilzation stats for a server from Pterodactyl
+     * Fetches utilization stats for a server from Pterodactyl
      *
-     * @param int $server_id The ID of the server to fetch
+     * @param int $server_id The ID of the server for which to fetch stats
      * @return PterodactylResponse
      */
     public function getServerUtilization($server_id)

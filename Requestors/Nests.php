@@ -1,7 +1,9 @@
 <?php
 namespace Blesta\PterodactylSDK\Requestors;
 
-class Nests extends Requestor
+include_once dirname(__DIR__) . '/Requestor.php';
+
+class Nests extends \Blesta\PterodactylSDK\Requestor
 {
     /**
      * Fetches a list of nests from Pterodactyl
@@ -32,7 +34,7 @@ class Nests extends Requestor
      */
     public function eggsGetAll($nest_id)
     {
-        return $this->apiRequest('application/nests' . $nest_id . '/eggs');
+        return $this->apiRequest('application/nests/' . $nest_id . '/eggs' . '?include=variables');
     }
 
     /**
@@ -44,6 +46,6 @@ class Nests extends Requestor
      */
     public function eggsGet($nest_id, $egg_id)
     {
-        return $this->apiRequest('application/nests/' . $nest_id . '/eggs/' . $egg_id);
+        return $this->apiRequest('application/nests/' . $nest_id . '/eggs/' . $egg_id . '?include=variables');
     }
 }
