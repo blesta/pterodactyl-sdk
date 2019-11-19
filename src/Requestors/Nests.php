@@ -1,8 +1,6 @@
 <?php
 namespace Blesta\PterodactylSDK\Requestors;
 
-include_once dirname(__DIR__) . '/Requestor.php';
-
 class Nests extends \Blesta\PterodactylSDK\Requestor
 {
     /**
