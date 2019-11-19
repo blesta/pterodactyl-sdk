@@ -1,14 +1,6 @@
 <?php
 namespace Blesta\PterodactylSDK;
 
-include 'PterodactylResponse.php';
-include 'Requestors/Client.php';
-include 'Requestors/Users.php';
-include 'Requestors/Nodes.php';
-include 'Requestors/Locations.php';
-include 'Requestors/Servers.php';
-include 'Requestors/Nests.php';
-
 /**
  * Pterodactyl API
  *
