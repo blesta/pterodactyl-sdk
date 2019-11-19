@@ -12,5 +12,10 @@
             "name": "Phillips Data, Inc.",
             "email": "jonathan@phpillipsdata.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Blesta\\PterodactylSDK\\":"src/"
+        }
+    }
 }

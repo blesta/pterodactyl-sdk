@@ -18,23 +18,23 @@ class Users extends \Blesta\PterodactylSDK\Requestor
     /**
      * Fetches a user from Pterodactyl
      *
-     * @param int $user_id The ID of the user to fetch
+     * @param int $userId The ID of the user to fetch
      * @return PterodactylResponse
      */
-    public function get($user_id)
+    public function get($userId)
     {
-        return $this->apiRequest('application/users/' . $user_id);
+        return $this->apiRequest('application/users/' . $userId);
     }
 
     /**
      * Fetches a user from Pterodactyl by external ID
      *
-     * @param int $external_id The external ID of the user to fetch
+     * @param int $externalId The external ID of the user to fetch
      * @return PterodactylResponse
      */
-    public function getByExternalID($external_id)
+    public function getByExternalID($externalId)
     {
-        return $this->apiRequest('application/users/external/' . $external_id);
+        return $this->apiRequest('application/users/external/' . $externalId);
     }
 
     /**
@@ -57,7 +57,7 @@ class Users extends \Blesta\PterodactylSDK\Requestor
     /**
      * Edits a user in Pterodactyl
      *
-     * @param int $user_id The ID of the user to edit
+     * @param int $userId The ID of the user to edit
      * @param array $params A list of request parameters including:
      *
      *  - username The username for the accoount
@@ -67,19 +67,19 @@ class Users extends \Blesta\PterodactylSDK\Requestor
      *  - password A plain text input of the desired password
      * @return PterodactylResponse
      */
-    public function edit($user_id, array $params)
+    public function edit($userId, array $params)
     {
-        return $this->apiRequest('application/users/' . $user_id, $params, 'PATCH');
+        return $this->apiRequest('application/users/' . $userId, $params, 'PATCH');
     }
 
     /**
      * Deletes a user in Pterodactyl
      *
-     * @param int $user_id The ID of the user to delete
+     * @param int $userId The ID of the user to delete
      * @return PterodactylResponse
      */
-    public function delete($user_id)
+    public function delete($userId)
     {
-        return $this->apiRequest('application/users/' . $user_id, [], 'DELETE');
+        return $this->apiRequest('application/users/' . $userId, [], 'DELETE');
     }
 }

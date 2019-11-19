@@ -18,34 +18,34 @@ class Nests extends \Blesta\PterodactylSDK\Requestor
     /**
      * Fetches a nest from Pterodactyl
      *
-     * @param int $nest_id The ID of the nest to fetch
+     * @param int $nestId The ID of the nest to fetch
      * @return PterodactylResponse
      */
-    public function get($nest_id)
+    public function get($nestId)
     {
-        return $this->apiRequest('application/nests/' . $nest_id);
+        return $this->apiRequest('application/nests/' . $nestId);
     }
 
     /**
      * Fetches a list of eggs for the given nest nest from Pterodactyl
      *
-     * @param int $nest_id The ID of the nest to fetch eggs for
+     * @param int $nestId The ID of the nest to fetch eggs for
      * @return PterodactylResponse
      */
-    public function eggsGetAll($nest_id)
+    public function eggsGetAll($nestId)
     {
-        return $this->apiRequest('application/nests/' . $nest_id . '/eggs' . '?include=variables');
+        return $this->apiRequest('application/nests/' . $nestId . '/eggs' . '?include=variables');
     }
 
     /**
      * Fetches an egg from Pterodactyl
      *
-     * @param int $nest_id The ID of the nest to which the egg belongs
+     * @param int $nestId The ID of the nest to which the egg belongs
      * @param int $egg_id The ID of the egg to fetch
      * @return PterodactylResponse
      */
-    public function eggsGet($nest_id, $egg_id)
+    public function eggsGet($nestId, $egg_id)
     {
-        return $this->apiRequest('application/nests/' . $nest_id . '/eggs/' . $egg_id . '?include=variables');
+        return $this->apiRequest('application/nests/' . $nestId . '/eggs/' . $egg_id . '?include=variables');
     }
 }

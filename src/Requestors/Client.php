@@ -18,46 +18,46 @@ class Client extends \Blesta\PterodactylSDK\Requestor
     /**
      * Fetches a server from Pterodactyl
      *
-     * @param int $server_id The ID of the server to fetch
+     * @param int $serverId The ID of the server to fetch
      * @return PterodactylResponse
      */
-    public function getServer($server_id)
+    public function getServer($serverId)
     {
-        return $this->apiRequest('client/servers/' . $server_id);
+        return $this->apiRequest('client/servers/' . $serverId);
     }
 
     /**
      * Fetches utilization stats for a server from Pterodactyl
      *
-     * @param int $server_id The ID of the server for which to fetch stats
+     * @param int $serverId The ID of the server for which to fetch stats
      * @return PterodactylResponse
      */
-    public function getServerUtilization($server_id)
+    public function getServerUtilization($serverId)
     {
-        return $this->apiRequest('client/servers/' . $server_id . '/utilization');
+        return $this->apiRequest('client/servers/' . $serverId . '/utilization');
     }
 
     /**
      * Sends a console command to the given server from Pterodactyl
      *
-     * @param int $server_id The ID of the server to which a command is being sent
+     * @param int $serverId The ID of the server to which a command is being sent
      * @param string $command The command being sent
      * @return PterodactylResponse
      */
-    public function serverConsoleCommand($server_id, $command)
+    public function serverConsoleCommand($serverId, $command)
     {
-        return $this->apiRequest('client/servers/' . $server_id . '/command', ['command' => $command], 'POST');
+        return $this->apiRequest('client/servers/' . $serverId . '/command', ['command' => $command], 'POST');
     }
 
     /**
      * Sends a power signal to the given server from Pterodactyl
      *
-     * @param int $server_id The ID of the server to which a power signal is being sent
+     * @param int $serverId The ID of the server to which a power signal is being sent
      * @param string $signal The power signal to send ('start', 'stop', 'restart', or 'kill')
      * @return PterodactylResponse
      */
-    public function serverPowerSignal($server_id, $signal)
+    public function serverPowerSignal($serverId, $signal)
     {
-        return $this->apiRequest('client/servers/' . $server_id . '/power', ['signal' => $signal], 'POST');
+        return $this->apiRequest('client/servers/' . $serverId . '/power', ['signal' => $signal], 'POST');
     }
 }
