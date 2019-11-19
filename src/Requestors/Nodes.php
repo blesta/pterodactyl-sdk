@@ -18,12 +18,12 @@ class Nodes extends \Blesta\PterodactylSDK\Requestor
     /**
      * Fetches a node from Pterodactyl
      *
-     * @param int $node_id The ID of the node to fetch
+     * @param int $nodeId The ID of the node to fetch
      * @return PterodactylResponse
      */
-    public function get($node_id)
+    public function get($nodeId)
     {
-        return $this->apiRequest('application/nodes/' . $node_id);
+        return $this->apiRequest('application/nodes/' . $nodeId);
     }
 
     /**
@@ -54,7 +54,7 @@ class Nodes extends \Blesta\PterodactylSDK\Requestor
     /**
      * Edits a node in Pterodactyl
      *
-     * @param int $node_id The ID of the node to edit
+     * @param int $nodeId The ID of the node to edit
      * @param array $params A list of request parameters including:
      *
      *  - name Then name of the node
@@ -72,37 +72,37 @@ class Nodes extends \Blesta\PterodactylSDK\Requestor
      *  - daemon_sftp The port the daemon sftp-server or standalone SFTP server listen on
      * @return PterodactylResponse
      */
-    public function edit($node_id, array $params)
+    public function edit($nodeId, array $params)
     {
-        return $this->apiRequest('application/nodes/' . $node_id, $params, 'PATCH');
+        return $this->apiRequest('application/nodes/' . $nodeId, $params, 'PATCH');
     }
 
     /**
      * Deletes a node in Pterodactyl
      *
-     * @param int $node_id The ID of the node to delete
+     * @param int $nodeId The ID of the node to delete
      * @return PterodactylResponse
      */
-    public function delete($node_id)
+    public function delete($nodeId)
     {
-        return $this->apiRequest('application/nodes/' . $node_id, [], 'DELETE');
+        return $this->apiRequest('application/nodes/' . $nodeId, [], 'DELETE');
     }
 
     /**
      * Fetches all allocations for a node from Pterodactyl
      *
-     * @param int $node_id The ID of the node for which to fetch allocations
+     * @param int $nodeId The ID of the node for which to fetch allocations
      * @return PterodactylResponse
      */
-    public function allocationsGetAll($node_id)
+    public function allocationsGetAll($nodeId)
     {
-        return $this->apiRequest('application/nodes/' . $node_id . '/allocations');
+        return $this->apiRequest('application/nodes/' . $nodeId . '/allocations');
     }
 
     /**
      * Adds a node allocation in Pterodactyl
      *
-     * @param int $node_id The ID of the node for which to add an allocation
+     * @param int $nodeId The ID of the node for which to add an allocation
      * @param array $params A list of request parameters including:
      *
      *  - ip
@@ -110,20 +110,20 @@ class Nodes extends \Blesta\PterodactylSDK\Requestor
      *  - ports
      * @return PterodactylResponse
      */
-    public function allocationsAdd($node_id, array $params)
+    public function allocationsAdd($nodeId, array $params)
     {
-        return $this->apiRequest('application/nodes/' . $node_id . '/allocations/', $params, 'POST');
+        return $this->apiRequest('application/nodes/' . $nodeId . '/allocations/', $params, 'POST');
     }
 
     /**
      * Deletes a node allocation in Pterodactyl
      *
-     * @param int $node_id The ID of the node for which to delete an allocation
-     * @param int $allocation_id The ID of the allocation to delete
+     * @param int $nodeId The ID of the node for which to delete an allocation
+     * @param int $allocationId The ID of the allocation to delete
      * @return PterodactylResponse
      */
-    public function allocationsDelete($node_id, $allocation_id)
+    public function allocationsDelete($nodeId, $allocationId)
     {
-        return $this->apiRequest('application/nodes/' . $node_id . '/allocations/' . $allocation_id, [], 'DELETE');
+        return $this->apiRequest('application/nodes/' . $nodeId . '/allocations/' . $allocationId, [], 'DELETE');
     }
 }

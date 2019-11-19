@@ -18,12 +18,12 @@ class Locations extends \Blesta\PterodactylSDK\Requestor
     /**
      * Fetches a location from Pterodactyl
      *
-     * @param int $location_id The ID of the location to fetch
+     * @param int $locationId The ID of the location to fetch
      * @return PterodactylResponse
      */
-    public function get($location_id)
+    public function get($locationId)
     {
-        return $this->apiRequest('application/locations/' . $location_id);
+        return $this->apiRequest('application/locations/' . $locationId);
     }
 
     /**
@@ -43,26 +43,26 @@ class Locations extends \Blesta\PterodactylSDK\Requestor
     /**
      * Edits a location in Pterodactyl
      *
-     * @param int $location_id The ID of the location to edit
+     * @param int $locationId The ID of the location to edit
      * @param array $params A list of request parameters including:
      *
      *  - shortcode The shortcode of the location
      *  - description A description of the location
      * @return PterodactylResponse
      */
-    public function edit($location_id, array $params)
+    public function edit($locationId, array $params)
     {
-        return $this->apiRequest('application/locations/' . $location_id, $params, 'PATCH');
+        return $this->apiRequest('application/locations/' . $locationId, $params, 'PATCH');
     }
 
     /**
      * Deletes a location in Pterodactyl
      *
-     * @param int $location_id The ID of the location to delete
+     * @param int $locationId The ID of the location to delete
      * @return PterodactylResponse
      */
-    public function delete($location_id)
+    public function delete($locationId)
     {
-        return $this->apiRequest('application/locations/' . $location_id, [], 'DELETE');
+        return $this->apiRequest('application/locations/' . $locationId, [], 'DELETE');
     }
 }
