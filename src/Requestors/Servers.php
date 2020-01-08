@@ -45,7 +45,7 @@ class Servers extends \Blesta\PterodactylSDK\Requestor
      */
     public function add(array $params)
     {
-        return $this->apiRequest('application/servers', $params, 'POST');
+        return $this->apiRequest('application/servers?include=allocations', $params, 'POST');
     }
 
     /**
@@ -57,7 +57,7 @@ class Servers extends \Blesta\PterodactylSDK\Requestor
      */
     public function editDetails($serverId, array $params)
     {
-        return $this->apiRequest('application/servers/' . $serverId . '/details', $params, 'PATCH');
+        return $this->apiRequest('application/servers/' . $serverId . '/details?include=allocations', $params, 'PATCH');
     }
 
     /**
