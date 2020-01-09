@@ -25,7 +25,7 @@ class Requestor
     /**
      * @var array A list of query parameters to include with any requests made by the requestor
      */
-    private $queryParameters;
+    private $queryParameters = [];
 
     /**
      * Initializes the requestor with connection parameters
@@ -44,7 +44,7 @@ class Requestor
     /**
      * Set the data to be used as query parameters for this requestor
      *
-     * @param array $params The data for the query parameters
+     * @param array $params A set of key/value pairs representing each query argument and its value
      */
     public function setQueryParameters(array $params)
     {
