@@ -4,6 +4,19 @@ namespace Blesta\PterodactylSDK\Requestors;
 class Servers extends \Blesta\PterodactylSDK\Requestor
 {
     /**
+     * Initializes the requestor with connection parameters
+     *
+     * @param string $apiKey The API key
+     * @param string $apiUrl The API URL
+     * @param bool $useSsl Whether to connect using ssl (optional)
+     */
+    public function __construct($apiKey, $apiUrl, $useSsl = true)
+    {
+        $this->setQueryParameters(['include' => 'allocations']);
+        parent::__construct($apiKey, $apiUrl, $useSsl);
+    }
+
+    /**
      * Fetches a list of servers from Pterodactyl
      *
      * @return PterodactylResponse
