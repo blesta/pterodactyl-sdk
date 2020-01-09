@@ -4,6 +4,19 @@ namespace Blesta\PterodactylSDK\Requestors;
 class Nests extends \Blesta\PterodactylSDK\Requestor
 {
     /**
+     * Initializes the requestor with connection parameters
+     *
+     * @param string $apiKey The API key
+     * @param string $apiUrl The API URL
+     * @param bool $useSsl Whether to connect using ssl (optional)
+     */
+    public function __construct($apiKey, $apiUrl, $useSsl = true)
+    {
+        $this->setQueryParameters(['include' => 'variables']);
+        parent::__construct($apiKey, $apiUrl, $useSsl);
+    }
+
+    /**
      * Fetches a list of nests from Pterodactyl
      *
      * @return PterodactylResponse
@@ -32,7 +45,7 @@ class Nests extends \Blesta\PterodactylSDK\Requestor
      */
     public function eggsGetAll($nestId)
     {
-        return $this->apiRequest('application/nests/' . $nestId . '/eggs' . '?include=variables');
+        return $this->apiRequest('application/nests/' . $nestId . '/eggs');
     }
 
     /**
@@ -44,6 +57,6 @@ class Nests extends \Blesta\PterodactylSDK\Requestor
      */
     public function eggsGet($nestId, $egg_id)
     {
-        return $this->apiRequest('application/nests/' . $nestId . '/eggs/' . $egg_id . '?include=variables');
+        return $this->apiRequest('application/nests/' . $nestId . '/eggs/' . $egg_id);
     }
 }

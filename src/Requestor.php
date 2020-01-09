@@ -22,6 +22,10 @@ class Requestor
      * @var bool Whether to connect using ssl
      */
     private $useSsl;
+    /**
+     * @var array A list of query parameters to include with any requests made by the requestor
+     */
+    private $queryParameters = [];
 
     /**
      * Initializes the requestor with connection parameters
@@ -38,6 +42,16 @@ class Requestor
     }
 
     /**
+     * Set the data to be used as query parameters for this requestor
+     *
+     * @param array $params A set of key/value pairs representing each query argument and its value
+     */
+    public function setQueryParameters(array $params)
+    {
+        $this->queryParameters = $params;
+    }
+
+    /**
      * Send an API request to Pterodactyl
      *
      * @param string $route The path to the API method
@@ -47,14 +61,15 @@ class Requestor
      */
     protected function apiRequest($route, array $body = [], $method = 'GET')
     {
-        $url = ($this->useSsl ? 'https://' : '') . $this->apiUrl . '/' . $route;
+        $url = ($this->useSsl ? 'https://' : '') . $this->apiUrl . '/' . $route
+            . (!empty($this->queryParameters) ? '?' . http_build_query($this->queryParameters) : '');
         $curl = curl_init();
 
         switch (strtoupper($method)) {
             case 'DELETE':
                 // Set data using get parameters
             case 'GET':
-                $url .= empty($body) ? '' : '?' . http_build_query($body);
+                $url .= empty($body) ? '' : (empty($this->queryParameters) ? '?' : '&') . http_build_query($body);
                 break;
             case 'POST':
                 curl_setopt($curl, CURLOPT_POST, 1);
