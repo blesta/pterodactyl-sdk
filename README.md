@@ -1,7 +1,5 @@
 # Pterodactyl SDK
 
-## THIS IS CURRENTLY UNDER DEVELOPMENT.
-
 This is an SDK that integrates with APIs from [Pterodactyl](https://pterodactyl.com/) [Docs](https://dashflo.net/docs/api/pterodactyl/v1/#introduction).
 
 ## Installation

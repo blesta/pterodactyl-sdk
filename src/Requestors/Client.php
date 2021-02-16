@@ -32,7 +32,7 @@ class Client extends \Blesta\PterodactylSDK\Requestor
      */
     public function getServerUtilization($serverId)
     {
-        return $this->apiRequest('client/servers/' . $serverId . '/utilization');
+        return $this->apiRequest('client/servers/' . $serverId . '/resources');
     }
 
     /**
