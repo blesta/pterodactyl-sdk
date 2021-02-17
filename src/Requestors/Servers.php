@@ -131,17 +131,6 @@ class Servers extends \Blesta\PterodactylSDK\Requestor
     }
 
     /**
-     * Rebuild a server in Pterodactyl
-     *
-     * @param int $serverId The ID of the server to rebuild
-     * @return PterodactylResponse
-     */
-    public function rebuild($serverId)
-    {
-        return $this->apiRequest('application/servers/' . $serverId . '/rebuild', [], 'POST');
-    }
-
-    /**
      * Deletes a server in Pterodactyl
      *
      * @param int $serverId The ID of the server to delete
