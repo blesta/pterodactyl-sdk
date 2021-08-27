@@ -80,4 +80,15 @@ class Users extends \Blesta\PterodactylSDK\Requestor
     {
         return $this->apiRequest('application/users/' . $userId, [], 'DELETE');
     }
+
+    /**
+     * Fetches a user from Pterodactyl by email address
+     *
+     * @param string $email The email address of the user to fetch
+     * @return PterodactylResponse
+     */
+    public function getByEmail($email)
+    {
+        return $this->apiRequest('application/users?filter[email]=' . $email);
+    }
 }
