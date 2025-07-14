@@ -26,6 +26,10 @@ class Requestor
      * @var array A list of query parameters to include with any requests made by the requestor
      */
     private $queryParameters = [];
+    /**
+     * @var array A record of the parameters and headers sent with the last request
+     */
+    private $lastRequest = [];
 
     /**
      * Initializes the requestor with connection parameters
