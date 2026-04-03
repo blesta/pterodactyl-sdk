@@ -22,6 +22,10 @@ class PterodactylApi
      * @var bool Whether to connect using ssl
      */
     private $useSsl;
+    /**
+     * @var array Cached requestor instances
+     */
+    private $requestors = [];
 
     /**
      * Initializes the request parameter
@@ -45,8 +49,10 @@ class PterodactylApi
      */
     public function __get($className)
     {
-        $r = new \ReflectionClass('\\Blesta\\PterodactylSDK\\Requestors\\' . $className);
-        $this->{$className} = $r->newInstanceArgs([$this->apiKey, $this->apiUrl, $this->useSsl]);
-        return $this->{$className};
+        if (!isset($this->requestors[$className])) {
+            $r = new \ReflectionClass('\\Blesta\\PterodactylSDK\\Requestors\\' . $className);
+            $this->requestors[$className] = $r->newInstanceArgs([$this->apiKey, $this->apiUrl, $this->useSsl]);
+        }
+        return $this->requestors[$className];
     }
 }
